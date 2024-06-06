@@ -1,6 +1,6 @@
 # 🚧 under construction
 
-The code is a bit outdated and doesn't yet take into account additional supervised experiments. We'll update that soon.
+The code is a bit outdated and doesn't yet include the additional experiments in the appendix. We'll update that soon.
 
 We'll also be releasing checkpoints.
 

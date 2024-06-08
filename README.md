@@ -25,7 +25,7 @@ We recommend using cuda GPUs. The `--cpu` flag allows running the code (`exp.py`
 
 ## WandB
 
-The code rely on [WandB](https://wandb.ai/) for results logging and checkpointing.  To set up WandB, modify the `.env` file with your WandB entity and project in the following format:
+The code rely on [WandB](https://wandb.ai/) for results logging and checkpointing. To set up WandB, modify the `.env` file with your WandB entity and project in the following format:
 
 ```txt
 WANDB_ENTITY = "awandbentity"

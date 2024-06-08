@@ -28,7 +28,7 @@ We recommend using cuda GPUs. The `--cpu` flag allows running the code (`exp.py`
 
 ## WandB
 
-The code rely on [WandB](https://wandb.ai/) for results logging and checkpointing. To set up WandB, modify the `.env` file with your WandB entity and project in the following format:
+The code relies on [WandB](https://wandb.ai/) for results logging and checkpointing. To set up WandB, modify the `.env` file with your WandB entity and project in the following format:
 
 ```txt
 WANDB_ENTITY = "awandbentity"
@@ -37,13 +37,13 @@ WANDB_PROJECT = "awandbproject"
 
 # Dataset
 
-Rom-phon is not licenced for redistribution. Please contact Ciobanu and Dinu (2014) to obtain the full Romance dataset. WikiHan is licenced under cc0 and is located in `data` with the name `chinese_wikihan2022`.
+Rom-phon is not licensed for redistribution. Please contact Ciobanu and Dinu (2014) to obtain the full Romance dataset. WikiHan is licensed under cc0 and is located in `data` with the name `chinese_wikihan2022`.
 
 # Running Experiments
 
 `exp.py` is the main script to run experiments. 
 
-See `.sh` files under the `shs` directory for commands. We running all the `.sh` files 10 times. Commands to replicate a single experiment can be found with the `.sh` file for the corresponding dataset, label setting, and group.
+See `.sh` files under the `shs` directory for commands. We ran all the `.sh` files 10 times. Commands to replicate a single experiment can be found with the `.sh` file for the corresponding dataset, labeling setting, and group.
 
 For example, running a 20% labeled group 1 Rom-phon Trans-DPD-ΠM experiment corresponds to running this command:
 
@@ -59,7 +59,7 @@ python exp.py --logmodel --tags paper $GROUP_NAME --vram_thresh 2000 --architect
 
 ## Naming
 
-- 100% supervised experiments are identified by `exclude_unlabelled` but is equivalent to not including unlabelled.
+- 100% supervised experiments are identified by `exclude_unlabelled` but are equivalent when unlabelled data is included.
 - The WikiHan dataset could have been referred to as any of `wikihan`, `chinese_wikihan`, or `chinese_wikihan2022` in the code.
 - The Rom-phon dataset could have been referred to as any of `Nromance_ipa`, `Nrom_ipa`, or `Nrom` in the code. The prefix `N` has no meaning.
 - The strategy-architecture pairs have the following identifiers:
@@ -79,7 +79,7 @@ python exp.py --logmodel --tags paper $GROUP_NAME --vram_thresh 2000 --architect
     - `TransPiBst` = Trans-ΠM-BST
     - `TransBpallBst` = Trans-DPD-BST
     - `TransBpallPiBst` = Trans-DPD-ΠM-BST
-- Strategies can also the following identifiers:
+- Strategies can also have the following identifiers:
     - `supervised_only` = SUPV
     - `pimodel` = ΠM
     - `bpall_cringe` = DPD

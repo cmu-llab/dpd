@@ -16,6 +16,7 @@ This repository accompanies the paper "Semisupervised Neural Proto-Language Reco
 
 ```
 conda create --name dpd python=3.10.13 --yes
+conda activate dpd
 
 pip install editdistance==0.6.2 einops==0.6.1 huggingface-hub==0.16.4 lightning-utilities==0.8.0 lingpy==2.6.9 lingrex==1.3.0 matplotlib==3.7.1 numpy==1.24.3 pandas==2.0.2 Pillow==9.4.0 pytorch-lightning==2.0.4 sacrebleu==2.3.1 seaborn==0.12.2 tabulate==0.9.0 tokenizers==0.13.3 toml==0.10.2 torch==2.0.1 torchaudio==2.0.2 torchmetrics==0.11.4 torchshow==0.5.0 torchvision==0.15.2 tqdm==4.65.0 transformers==4.31.0 wandb==0.15.3 scikit-learn==1.4.0 scipy==1.12.0 lingpy==2.6.9 lingrex==1.3.0 newick==1.9.0 python-dotenv pandasql==0.7.3
 pip install panphon@git+https://github.com/dmort27/panphon.git@6acd3833743a49e63941a0b740ee69eae1dafc1c

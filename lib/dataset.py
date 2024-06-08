@@ -26,6 +26,7 @@ class DatasetBase(Dataset):
         min_daughters: int, # e.ge 3 # minimum number of daughters in a cognate set to be included in the dataset
         verbose: bool,
         proportion_labelled: float, # proportion of the dataset that is labelled, useful for semi-supervised learning
+        exclude_unlabelled: bool = False, # whether to throw away unlabelled examples, effectively making it supervised
     ):
         self.ipa_vocab = ipa_vocab
         self.lang_vocab = lang_vocab
@@ -34,6 +35,7 @@ class DatasetBase(Dataset):
         self.skip_protoform_tone = skip_protoform_tone
         
         self.verbose = verbose
+        self.exclude_unlabelled = exclude_unlabelled
         
         # 1 > load dataset
         D: list[dict[str, list[str]]] = [] # list of daughters, which are dicts
@@ -42,6 +44,7 @@ class DatasetBase(Dataset):
         Pf: list[LabelStatus] = [] # list of labelling status flags for protos
         with open(filepath, 'rb') as file:
             langs_list, data = pickle.load(file)
+            self.raw_data = data
         
         # 2 > get langs
         self.protolang: str = langs_list[0]
@@ -79,22 +82,33 @@ class DatasetBase(Dataset):
         else:
             self.p_labelled_mask_fingerprint = None
         
-        for (pl, is_labelled) in zip(Pl, p_labelled_mask):
-            if is_labelled:
-                Ps.append(pl)
-                Pf.append(LabelStatus.LABELLED)
+        D_rebuild = []
+        Pl_rebuild = []
+
+        for (d, pl, is_labelled) in zip(D, Pl, p_labelled_mask):
+            if not is_labelled and exclude_unlabelled:
+                pass
             else:
-                pu = copy.deepcopy(pl)
-                pu[self.protolang] = []
-                Ps.append(pu)
-                Pf.append(LabelStatus.UNLABELLED)
+                if is_labelled:
+                    Ps.append(pl)
+                    Pf.append(LabelStatus.LABELLED)
+                    D_rebuild.append(d)
+                    Pl_rebuild.append(pl)
+                else:
+                    pu = copy.deepcopy(pl)
+                    pu[self.protolang] = []
+                    Ps.append(pu)
+                    Pf.append(LabelStatus.UNLABELLED)
+                    D_rebuild.append(d)
+                    Pl_rebuild.append(pl)
 
         # 9 > store
-        assert len(D) == len(Pl) == len(Ps) == len(Pf)
-        self.D = D
-        self.Pl = Pl
+        self.length = len(D_rebuild)
+        self.D = D_rebuild
+        self.Pl = Pl_rebuild
         self.Ps = Ps
         self.Pf = Pf
+        assert len(self.D) == len(self.Pl) == len(self.Ps) == len(self.Pf)
 
     # DESTRUCTIVE!
     # turns partially labelled train set into a test set that tests the model's performance on the unlabelled portion of training data

@@ -32,10 +32,7 @@ class STRATS(Enum):
 
 class DATASETS(Enum):
     NRO_IPA = "Nromance_ipa"
-    NRO_ORTO = "Nromance_orto"
-    BAXTER = "chinese_baxter"
     WIKIHAN = "chinese_wikihan2022"
-    WIKIHAN_A = "chinese_wikihan2022_augmented"
     
 import argparse
 

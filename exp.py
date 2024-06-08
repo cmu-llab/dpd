@@ -1,7 +1,6 @@
 # region === imports ===
 import torch
 import pytorch_lightning as pl
-# from lib.analysis_utils import *
 import wandb
 from lib.dataloader_manager import DataloaderManager
 from models.encoderDecoderRNN import Seq2SeqRNN
@@ -96,12 +95,8 @@ parser.add_argument('--datasetseed', type=int, default=-1, help='Overwrite seed 
 
 # dataset
 parser.add_argument('--dataset', type=str, default="chinese_wikihan2022", help="Dataset to use", choices=[
-    'chinese_baxter', 
     'chinese_wikihan2022', 
-    'chinese_wikihan2022_augmented', 
     'Nromance_ipa', 
-    'Nromance_orto', 
-    'chinese_wikihan2022_augmented_drop_p_rate0.9'
 ])
 parser.add_argument('--batch_size', type=int, default=64, help="Batch size for training")
 parser.add_argument('--test_val_batch_size', type=int, default=64, help="Batch size for val and test")
@@ -111,6 +106,8 @@ parser.add_argument('--skip_protoform_tone', type=str2bool, default=False, help=
 parser.add_argument('--d2p_use_lang_separaters', type=str2bool, default=True, help="Whether to use language separators for d2p") # this doesn't matter for p2d
 parser.add_argument('--p2d_all_lang_summary_only', type=str2bool, default=True, help="Whether to use all language summary for p2d") # this doesn't matter for d2p
 parser.add_argument('--proportion_labelled', type=float, default=0.1, help="Proportion of data to be labelled") # for p2d set this to 1.0
+
+parser.add_argument('--exclude_unlabelled', action='store_true', default=False)
 
 # training
 parser.add_argument('--use_xavier_init', type=str2bool, default=True, help="Whether to use Xavier initialization")
@@ -353,6 +350,8 @@ config = {
     'p2d_all_lang_summary_only': args.p2d_all_lang_summary_only, 
     'proportion_labelled': args.proportion_labelled, 
     'transformer_d2p_d_cat_style': args.architecture == 'Transformer',
+    
+    'exclude_unlabelled': args.exclude_unlabelled,
 
     'use_xavier_init': args.use_xavier_init,
     'lr': args.lr,
@@ -500,6 +499,8 @@ dm = DataloaderManager(
     
     proportion_labelled = wandb.config.proportion_labelled, 
     datasetseed = datasetseed,
+    
+    exclude_unlabelled=wandb.config.exclude_unlabelled,
 )
 wandb.log({'train_p_labelled_mask_fingerprint': dm.train_p_labelled_mask_fingerprint})
 pl.seed_everything(seed)

@@ -25,6 +25,7 @@ class DataloaderManager:
         proportion_labelled: float,
         
         datasetseed: int,
+        exclude_unlabelled: bool = False, # whether to throw away unlabelled examples, effectively making it supervised
     ) -> None:
         self.verbose = verbose
         if self.verbose: print(f'Loading data from {data_dir}...')
@@ -44,6 +45,7 @@ class DataloaderManager:
         self.min_daughters = min_daughters
         self.proportion_labelled = proportion_labelled
         self.transformer_d2p_d_cat_style = transformer_d2p_d_cat_style
+        self.exclude_unlabelled = exclude_unlabelled
         
         if not self.include_lang_tkns_in_ipa_vocab:
             print('WARN: include_lang_tkns_in_ipa_vocab is False. This will make all lang tokens unknown. Beware when using encodeTokenSeqAppendTargetLangToken mode')
@@ -91,6 +93,7 @@ class DataloaderManager:
             verbose = self.verbose,
             proportion_labelled = proportion_labelled,
             transformer_d2p_d_cat_style=self.transformer_d2p_d_cat_style,
+            exclude_unlabelled=self.exclude_unlabelled
         )
         
         if self.verbose: print(f'# samples ({partition}): {len(dataset)}')

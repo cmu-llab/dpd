@@ -39,6 +39,10 @@ WANDB_PROJECT = "awandbproject"
 
 Rom-phon is not licensed for redistribution. Please contact Ciobanu and Dinu (2014) to obtain the full Romance dataset. WikiHan is licensed under cc0 and is located in `data` with the name `chinese_wikihan2022`.
 
+# Using Checkpoints
+
+`load_checkpoint.ipynb` provides an example of how a checkpoint can be loaded and evaluated.
+
 # Running Experiments
 
 `exp.py` is the main script to run experiments. 

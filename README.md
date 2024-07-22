@@ -4,6 +4,10 @@ This repository accompanies the paper "Semisupervised Neural Proto-Language Reco
 
 ![dpd](https://github.com/cmu-llab/dpd/assets/38693485/bfe5967d-03d4-423d-b4b8-d441c56f2d9f)
 
+<details><summary>GIF</summary>
+![acl2024 slides gif](https://github.com/user-attachments/assets/977566f2-b342-4bc2-840d-212b38423f61)
+</details>
+
 > **TL;DR:** We introduce the novel task of semisupervised protoform reconstruction and propose a neural architecture informed by historical linguists' comparative method, which outperforms baseline methods in almost all situations.
 
 > **Abstract:** Existing work implementing comparative reconstruction of ancestral languages (proto-languages) has usually required full supervision. However, historical reconstruction models are only of practical value if they can be trained with a limited amount of labeled data. We propose a semisupervised historical reconstruction task in which the model is trained on only a small amount of labeled data (cognate sets with proto-forms) and a large amount of unlabeled data (cognate sets without proto-forms). We propose a neural architecture for comparative reconstruction (DPD-BiReconstructor) incorporating an essential insight from linguists' comparative method: that reconstructed words should not only be reconstructable from their daughter words, but also deterministically transformable back into their daughter words. We show that this architecture is able to leverage unlabeled cognate sets to outperform strong semisupervised baselines on this novel task.

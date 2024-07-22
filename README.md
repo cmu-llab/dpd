@@ -5,7 +5,9 @@ This repository accompanies the paper "Semisupervised Neural Proto-Language Reco
 ![dpd](https://github.com/cmu-llab/dpd/assets/38693485/bfe5967d-03d4-423d-b4b8-d441c56f2d9f)
 
 <details><summary>GIF</summary>
+    
 ![acl2024 slides gif](https://github.com/user-attachments/assets/977566f2-b342-4bc2-840d-212b38423f61)
+
 </details>
 
 > **TL;DR:** We introduce the novel task of semisupervised protoform reconstruction and propose a neural architecture informed by historical linguists' comparative method, which outperforms baseline methods in almost all situations.
